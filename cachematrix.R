@@ -6,8 +6,16 @@
 ## is null (hence not stored in the cache) the inverse is calculated and set.
 ##
 ## Author: Daniel S. Plant
-## Version: 1.0
+## Version: 1.1
 ## Date: 16-FEB-2015
+##
+## Typical method:
+## For a matrix "A"
+## > source("cachematrix.R")
+## > x<-makeCacheMatrix(A)
+## > cacheSolve(x) -- This will output the inverse of A
+## > cacheSolve(x) -- Calling cacheSolve a second time will retrive the inverse
+##                      of A from the cache.
 
 ## This function produces a list of functions to set a matrix ("set"), retrieve a 
 ## matrix ("get"), set an inverse matrix ("setInverse"), and retrieve an 
@@ -16,8 +24,8 @@
 makeCacheMatrix <- function(x = matrix()) {
       inv <- NULL
       set <- function(y) {
-            x <- y
-            m <- NULL
+            x <<- y
+            m <<- NULL
       }
       get <- function() x
       setInverse <- function(inverse) inv <<- inverse
